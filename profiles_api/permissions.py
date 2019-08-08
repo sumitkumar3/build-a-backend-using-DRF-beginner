@@ -1,10 +1,10 @@
-from rest_framework import Permissions
+from rest_framework import permissions
 
-class UpadateOwnProfile(Permissions.BasePermission):
+class UpadateOwnProfile(permissions.BasePermission):
     """ update their own profile"""
-    def object_has_permission(self, request, view, obj):
+    def has_object_permission(self, request, view, obj):
 
-        if request.method is Permissions.SAFE_METHOD:
+        if request.method in permissions.SAFE_METHODS:
             return True
 
         return obj.id == request.user.id
